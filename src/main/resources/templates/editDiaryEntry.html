@@ -5,15 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Index</title>
+    <title>Document</title>
 </head>
 
 <body>
     <div id="leftSide">
-        <h1>Dagbok</h1><br>
-        <h2>Det valda dagboksinläggets överskrift</h2><br>
-        <p id="diaryEntry">Det valda inläggets text</p><br>
+        <form method="post" action="/addNewDiaryEntry">
+            <label>Överskrift: </label>
+            <input type="text" name="heading" required><br>
+            <label>Brödtext: </label>
+            <input type="text" name="text" required><br>
+            <label>Datum: </label>
+            <input type="date" name="date" required><br>
+            <h2>Det valda dagboksinläggets överskrift</h2><br>
+            <p id="diaryEntry">Det valda inläggets text</p><br>
+        </form>
     </div>
+
     <div id="rightSide">
 
         <div id="diaryDateSelector">
@@ -32,10 +40,6 @@
             </ul>
         </div>
     </div>
-
-
-
-
 </body>
 
 </html>

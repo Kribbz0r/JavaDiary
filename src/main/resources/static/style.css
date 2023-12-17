@@ -1,0 +1,20 @@
+#diaryEntryList {
+    background-color: rgb(128, 128, 226);
+}
+
+
+#diaryDateSelector {
+    background-color: aquamarine;
+}
+
+#leftSide {
+    position: relative;
+    width: 70%;
+
+}
+
+#rightSide {
+    position: absolute;
+    top: 0px;
+    right: 50px;
+}
