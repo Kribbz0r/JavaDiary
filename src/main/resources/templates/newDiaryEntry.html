@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Nytt Dagboksinlägg</title>
 </head>
 
 <body>
-    <div id="leftSide">
+    <div class="leftSide">
         <form method="post" th:action="@{/addNewDiaryEntry}">
             <label>Överskrift: </label>
             <input type="text" name="heading" required><br>
@@ -20,13 +20,14 @@
             <button>Skapa Inlägg</button>
         </form>
     </div>
-    <div id="rightSide">
 
-        <div id="diaryDateSelector">
-            <ul>
-                <li>Date 1</li>
-                <li>Date 2</li>
-            </ul>
+    <div class="rightSide">
+        <div>
+            <form method="post" th:action="@{/selectDiaryDates}" id="diaryDateSelector">
+                <input type="date" name="startOfSelectedDate"><br>
+                <input type="date" name="endOfSelectedDate">
+
+            </form>
         </div>
 
 

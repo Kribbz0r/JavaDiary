@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Redigera Dagboksinlägg</title>
 </head>
 
 <body>
-    <div id="leftSide">
-        <form method="post" action="/addNewDiaryEntry">
+    <div class="leftSide">
+        <form method="post" action="/editNewDiaryEntry">
             <label>Överskrift: </label>
             <input type="text" name="heading" required><br>
             <label>Brödtext: </label>
@@ -18,20 +18,20 @@
             <label>Datum: </label>
             <input type="date" name="date" required><br>
             <h2>Det valda dagboksinläggets överskrift</h2><br>
-            <p id="diaryEntry">Det valda inläggets text</p><br>
+            <p class="diaryEntry">Det valda inläggets text</p><br>
         </form>
     </div>
 
-    <div id="rightSide">
+    <div class="rightSide">
 
-        <div id="diaryDateSelector">
-            <ul>
-                <li>Date 1</li>
-                <li>Date 2</li>
-            </ul>
+        <div>
+            <form class="diaryDateSelector">
+                <input type="date" name="startOfSelectedDate"><br>
+                <input type="date" name="endOfSelectedDate">
+            </form>
         </div>
 
-        <div id="diaryEntryList">
+        <div class="diaryEntryList">
             <ul>
                 <!-- Fix och pill. Jannes första film -->
                 <li th:each="diary : ${diary}"><span th:text="${diary.heading}"></span>
