@@ -9,40 +9,18 @@
 </head>
 
 <body>
-    <h1>Tjabba</h1>
-    <div class="leftSide">
-        <h1>Dagbok</h1><br>
-        <div th:each="diary : ${diary}">
-            <h2 th:text="${diary.heading}">Det valda dagboksinläggets överskrift</h2>
-        </div>
+
+    <h1>Dagbok</h1><br>
+    <form>
+        <p th:each="diary : ${diaryEntry}" th:text="'Inläggets ID: ' + ${diary.id}"></p><br><br>
+        <p th:each="diary : ${diaryEntry}" th:text="${diary.date}"></p>
+        <h2 th:each="diary : ${diaryEntry}" th:text="${diary.heading}"></h2>
         <br>
-        <p>Det valda inläggets text</p><br>
-        <a href="http://localhost:8080/editDiaryEntry"><button>Redigera Inlägg</button></a>
-    </div>
-    <div class="rightSide">
+        <p th:each="diary : ${diaryEntry}" th:text="${diary.text}"></p><br>
 
-        <div>
-            <form class="diaryDateSelector">
-                <input type="date" name="startOfSelectedDate"><br>
-                <input type="date" name="endOfSelectedDate">
-            </form>
-        </div>
+    </form>
 
-        <div class="diaryEntryList">
-            <ul>
-                Fix och pill. Jannes första film
-                <li th:each="diary : ${diary}"><a th:href="@{/{diary}(diary=${diary.heading})}">
-                        <span th:text=" ${diary.heading}"></span></a>
-                </li>
-            </ul>
-
-        </div>
-        <a href="http://localhost:8080/newDiaryEntry"><button>Skapa Inlägg</button></a>
-    </div>
-
-
-
-
+    <a href="http://localhost:8080/"><button>Index</button></a>
 </body>
 
 </html>

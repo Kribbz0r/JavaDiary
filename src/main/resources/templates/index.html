@@ -9,35 +9,29 @@
 </head>
 
 <body>
-    <div class="leftSide">
-        <h1>Dagbok</h1><br>
-        <div>
-            <h2 class="diaryEntryHeading" th:each="diary : ${diary}" th:text=" ${diary.heading}">Det valda
-                dagboksinläggets överskrift</h2><br>
-            <p class="diaryEntryText">Det valda inläggets text</p><br>
-        </div>
-        <a href="http://localhost:8080/editDiaryEntry"><button>Redigera Inlägg</button></a>
-    </div>
-    <div class="rightSide">
-        <div>
-            <form class="diaryDateSelector">
-                <input type="date" name="startOfSelectedDate"><br>
-                <input type="date" name="endOfSelectedDate">
-            </form>
-        </div>
+    <h1>Dagbok</h1><br>
 
-        <div class="diaryEntryList">
-            <ul>
-                <!-- Fix och pill. Jannes första film -->
-                <li th:each="diary : ${diary}"><a th:href="@{/diaryEntry/{diary}(diary=${diary.id})}">
-                        <span th:text=" ${diary.heading}"> </span>
-                    </a>
-                </li>
-            </ul>
 
-        </div>
-        <a href="http://localhost:8080/newDiaryEntry"><button>Skapa Inlägg</button></a>
+    <form> <!--Här ska det in en massa th: -->
+        <p>Visa inlägg mellan följande datum:</p><br>
+        <input type="date" name="startOfSelectedDate" required><br>
+        <input type="date" name="endOfSelectedDate" required><br>
+        <a th:href="@{/getSelectedDates}"></a><button>Välj datum</button>
+    </form>
+
+
+    <div class="diaryEntryList">
+        <ul>
+            <li th:each="diary : ${diary}"><a th:href="@{/diaryEntry/{diary}(diary=${diary.id})}">
+                    <span th:text=" ${diary.heading}"> </span>
+                </a>
+                <a th:href="@{/showEditDiaryEntry/{diary}(diary=${diary.id})}"><button>Redigera inlägg</button></a>
+                <a th:href="@{/deleteDiaryEntry/{diary}(diary=${diary.id})}"><button>Radera inlägg</button></a>
+            </li>
+        </ul>
     </div>
+    <a th:href="@{/showNewDiaryEntry}"><button>Skapa nytt Inlägg</button></a>
+
 
 
 

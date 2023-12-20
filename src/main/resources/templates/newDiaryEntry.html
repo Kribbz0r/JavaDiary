@@ -9,29 +9,17 @@
 </head>
 
 <body>
-    <div class="leftSide">
-        <form method="post" th:action="@{/addNewDiaryEntry}">
-            <label>Överskrift: </label>
-            <input type="text" name="heading" required><br>
-            <label>Brödtext: </label>
-            <input type="text" name="text" required><br>
-            <label>Datum: </label>
-            <input type="date" name="date" required><br>
-            <button>Skapa Inlägg</button>
-        </form>
-    </div>
-
-    <div class="rightSide">
-        <div>
-            <form method="post" th:action="@{/selectDiaryDates}" id="diaryDateSelector">
-                <input type="date" name="startOfSelectedDate"><br>
-                <input type="date" name="endOfSelectedDate">
-
-            </form>
-        </div>
-
-
-    </div>
+    <h1>Skapa nytt inlägg</h1>
+    <form action="#" th:action="@{/addNewDiaryEntry}" th:object="${diary}" method="post">
+        <label>Överskrift: </label>
+        <input type="text" th:field="*{heading}" placeholder="Överskrift" required><br>
+        <label>Brödtext: </label>
+        <input type="text" th:field="*{text}" placeholder="Dagboksinlägget" required><br>
+        <label>Datum: </label>
+        <input type="date" th:field="*{date}" required><br>
+        <button type="submit">Skapa Inlägg</button>
+    </form>
+    <a href="http://localhost:8080/"><button>Index</button></a>
 </body>
 
 </html>

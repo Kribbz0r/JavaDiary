@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,56 +23,66 @@ public class DiaryController {
 
     @GetMapping
     public String getIndex(Model model) {
-        model.addAttribute("diary", diaryRepository.findAll());
+        model.addAttribute("diary", diaryRepository.findDiaryEntriesForTodayAndEarlier());
 
         return "index";
     }
 
-    @PostMapping("/addNewDiaryEntry")
-    public String addNewDiaryEntry(@RequestParam("heading") String heading, @RequestParam("text") String text,
-            @RequestParam("date") Date date) {
-        Diary diary = new Diary();
-        diary.setHeading(heading);
-        diary.setText(text);
-        diary.setDate(date);
-        diaryRepository.save(diary);
-        System.out.println("Funkar /addNewDiaryEntry?");
-        return "redirect:/newDiaryEntry";
+    @GetMapping("/getSelectedDates")
+    public String getSelectedDates(Model model, @PathVariable(value = "date1") Date date1,
+            @PathVariable(value = "date2") Date date2) {
+        model.addAttribute("date1", diaryRepository.findDiaryEntriesBetweenTwoDates());
+        return "index";
     }
 
-    @GetMapping("/newDiaryEntry")
-    String newDiaryEntry(Model model) {
+    @PostMapping("/addNewDiaryEntry")
+    public String addNewDiaryEntry(@ModelAttribute("diary") Diary diary) {
+        diaryRepository.save(diary);
+        System.out.println("Dagboksinlägg med ID: " + diary.getId() + " är sparat till databasen");
+        return "redirect:/";
+    }
+
+    @GetMapping("/showNewDiaryEntry")
+    String showNewDiaryEntry(Model model) {
+        Diary diary = new Diary();
+        model.addAttribute("diary", diary);
         return "/newDiaryEntry";
     }
 
-    // @GetMapping("/newDiaryEntry/{diaryEntry}")
-    // String getDiaryEntry(Model model, @RequestParam int diaryEntry) {
-    // model.addAttribute("diaryEntry", diaryRepository.findById(diaryEntry));
-    // System.out.println("händer något?");
-    // return "/newDiaryEntry";
-    // }
+    @GetMapping("/showEditDiaryEntry/{id}")
+    String showEditDiaryEntry(@PathVariable(value = "id") int id, Model model) {
+        Optional<Diary> diary = diaryRepository.findById(id);
+        model.addAttribute("diary", diary);
+        return "editDiaryEntry";
+
+    }
 
     @GetMapping("/diaryEntry/{id}")
     public String getDiaryEntry(Model model, @PathVariable(value = "id") int diaryEntry) {
         Optional<Diary> diary = diaryRepository.findById(diaryEntry);
         if (diary.isPresent()) {
-            model.addAttribute("diaryEntry", diary); // här ska det göras grejer
-            System.out.println("sker jag?");
+            model.addAttribute("diaryEntry", diary.get());
+            System.out.println("Detta är mitt id: " + diaryEntry);
+            System.out.println("detta är min överskrift: " + diary.get().getHeading());
             return "/diaryEntry";
         }
-
-        // for (Diary diary : diaryRepository.findDiaryId()) {
-        // if (diary.getId() == (diaryEntry.getId())) {
-        // currentDiary.setId(diaryEntry);
-        // return "redirect:/{diaryEntry}";
-        // }
-        // }
-
         return "redirect:/";
     }
 
-    @GetMapping("/editDiaryEntry")
-    String editDiaryEntry(Model model) {
-        return "/editDiaryEntry";
+    @GetMapping("/editDiaryEntry/{id}")
+    String editDiaryEntry(@PathVariable(value = "id") int id, Model model) {
+        Diary diary = diaryRepository.findById(id).get();
+        model.addAttribute("diary", diary);
+        System.out.println("GetMapping för editDiaryEntry/{id}");
+        return "editDiaryEntry";
     }
+
+    @GetMapping("/deleteDiaryEntry/{id}")
+    String deleteDiaryEntry(@PathVariable(value = "id") int id) {
+
+        System.out.println("delete mapping: " + id);
+        diaryRepository.deleteById(id);
+        return "redirect:/";
+    }
+
 }

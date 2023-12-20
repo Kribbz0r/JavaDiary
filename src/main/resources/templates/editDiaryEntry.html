@@ -9,37 +9,18 @@
 </head>
 
 <body>
-    <div class="leftSide">
-        <form method="post" action="/editNewDiaryEntry">
-            <label>Överskrift: </label>
-            <input type="text" name="heading" required><br>
-            <label>Brödtext: </label>
-            <input type="text" name="text" required><br>
-            <label>Datum: </label>
-            <input type="date" name="date" required><br>
-            <h2>Det valda dagboksinläggets överskrift</h2><br>
-            <p class="diaryEntry">Det valda inläggets text</p><br>
-        </form>
-    </div>
-
-    <div class="rightSide">
-
-        <div>
-            <form class="diaryDateSelector">
-                <input type="date" name="startOfSelectedDate"><br>
-                <input type="date" name="endOfSelectedDate">
-            </form>
-        </div>
-
-        <div class="diaryEntryList">
-            <ul>
-                <!-- Fix och pill. Jannes första film -->
-                <li th:each="diary : ${diary}"><span th:text="${diary.heading}"></span>
-
-                </li>
-            </ul>
-        </div>
-    </div>
+    <h1>Updatera inlägg</h1><br>
+    <form action="#" th:action="@{/addNewDiaryEntry}" th:object="${diary}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <label>Överskrift: </label>
+        <input type="text" th:field="*{heading}" required><br>
+        <label>Brödtext: </label>
+        <input type="text" th:field="*{text}" required><br>
+        <label>Datum: </label>
+        <input type="date" th:field="*{date}" required><br>
+        <button>Spara redigerat inlägg</button>
+    </form>
+    <a href="http://localhost:8080/"><button>Index</button></a>
 </body>
 
 </html>
