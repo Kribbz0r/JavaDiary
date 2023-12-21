@@ -9,30 +9,18 @@
 
 <body>
     <h1>Dagbok</h1><br>
-
-    <form th:action="@{/getSelectedDates}" method="post">
-        <p>Visa inlägg mellan följande datum:</p><br>
-        <input type="date" name="startOfSelectedDate" required><br>
-        <input type="date" name="endOfSelectedDate" required><br>
-        <button type="submit">Välj datum</button>
-    </form>
-
-
     <div class="diaryEntryList">
         <ul>
             <li th:each="diary : ${diary}"><a th:href="@{/diaryEntry/{diary}(diary=${diary.id})}">
                     <span th:text=" ${diary.heading}"> </span>
+                    <a th:href="@{/showEditDiaryEntry/{diary}(diary=${diary.id})}"><button>Redigera inlägg</button></a>
+                    <a th:href="@{/deleteDiaryEntry/{diary}(diary=${diary.id})}"><button>Radera inlägg</button></a>
                 </a>
-                <a th:href="@{/showEditDiaryEntry/{diary}(diary=${diary.id})}"><button>Redigera inlägg</button></a>
-                <a th:href="@{/deleteDiaryEntry/{diary}(diary=${diary.id})}"><button>Radera inlägg</button></a>
             </li>
         </ul>
     </div>
     <a th:href="@{/showNewDiaryEntry}"><button>Skapa nytt Inlägg</button></a>
-
-
-
-
+    <a href="http://localhost:8080/"><button>Index</button></a>
 
 </body>
 

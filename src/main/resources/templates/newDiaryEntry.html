@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Nytt Dagboksinlägg</title>
 </head>
 
@@ -13,7 +12,7 @@
     <form action="#" th:action="@{/addNewDiaryEntry}" th:object="${diary}" method="post">
         <label>Överskrift: </label>
         <input type="text" th:field="*{heading}" placeholder="Överskrift" required><br>
-        <label>Brödtext: </label>
+        <label>Text: </label>
         <input type="text" th:field="*{text}" placeholder="Dagboksinlägget" required><br>
         <label>Datum: </label>
         <input type="date" th:field="*{date}" required><br>

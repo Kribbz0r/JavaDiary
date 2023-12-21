@@ -4,12 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Dagbok</title>
 </head>
 
 <body>
-
     <h1>Dagbok</h1><br>
     <form>
         <p th:each="diary : ${diaryEntry}" th:text="'Inläggets ID: ' + ${diary.id}"></p><br><br>
@@ -17,7 +15,6 @@
         <h2 th:each="diary : ${diaryEntry}" th:text="${diary.heading}"></h2>
         <br>
         <p th:each="diary : ${diaryEntry}" th:text="${diary.text}"></p><br>
-
     </form>
 
     <a href="http://localhost:8080/"><button>Index</button></a>
